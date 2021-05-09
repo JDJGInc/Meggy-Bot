@@ -6,10 +6,15 @@ import random
 class Mod(commands.Cog):
   def __init__(self,bot):
     self.bot = bot
-    self.mod_list = [479766831494856724,455569859086909491,270932420532895745,361712001954611210]
 
   async def cog_check(self, ctx):
-    return ctx.author.id in self.mod_list
+    db = self.bot.DB
+    collection = db["Mods"]
+    for document in await collection.find().to_list(None):
+      if ctx.author.id == document["ModId"]:
+        return True
+    return False
+
 
   @commands.command(help="fetch invite details")
   async def fetch_invite(self,ctx,*invites:typing.Union[discord.Invite, str]):

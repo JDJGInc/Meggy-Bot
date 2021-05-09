@@ -6,10 +6,6 @@ from discord.ext import commands
 class MeggyBot(commands.Bot):
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
-    #calls the base _init_ class
-    self.DB_client = motor.motor_asyncio.AsyncIOMotorClient(str(os.environ['DB_data']))
-    self.DB = self.DB_client["Meggy_Data"]
-    self.mod_collection = self.DB["Meggy_data"]
 
   async def start(self,*args, **kwargs):
     self.session=aiohttp.ClientSession()
@@ -28,6 +24,9 @@ class MeggyBot(commands.Bot):
 #subclasses bot to allow all areas of the client to be able to use the database session.
 
 bot = MeggyBot(command_prefix=commands.when_mentioned_or("m*"),intents = discord.Intents.all())
+mongo_url = os.environ.get("DB_data")
+DB_client = motor.motor_asyncio.AsyncIOMotorClient(mongo_url)
+bot.DB = DB_client["Meggy_Data"]
 #defines the bot object without it no bot access
 #intents refers to stuff discord uses(just look up it's meaning)
 
