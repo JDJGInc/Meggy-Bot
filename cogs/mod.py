@@ -1,16 +1,15 @@
 import discord
 from discord.ext import commands
 import typing
-import random 
-
-mod_list = [479766831494856724,455569859086909491,270932420532895745,361712001954611210]
+import random
 
 class Mod(commands.Cog):
   def __init__(self,bot):
     self.bot = bot
+    self.mod_list = [479766831494856724,455569859086909491,270932420532895745,361712001954611210]
 
   async def cog_check(self, ctx):
-    return ctx.author.id in mod_list
+    return ctx.author.id in self.mod_list
 
   @commands.command(help="fetch invite details")
   async def fetch_invite(self,ctx,*invites:typing.Union[discord.Invite, str]):

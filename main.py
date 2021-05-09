@@ -6,20 +6,26 @@ from discord.ext import commands
 class MeggyBot(commands.Bot):
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
+    #calls the base _init_ class
+    self.DB_client = motor.motor_asyncio.AsyncIOMotorClient(str(os.environ['DB_data']))
+    self.DB = self.DB_client["Meggy_Data"]
+    self.mod_collection = self.DB["Meggy_data"]
 
   async def start(self,*args, **kwargs):
     self.session=aiohttp.ClientSession()
-    DB_logindetails = str(os.environ['DB_data'])
-    self.DB_client = motor.motor_asyncio.AsyncIOMotorClient(DB_logindetails)
-    self.DB = self.DB_client.Meggy_Data
-    self.mod_data = self.DB.Mod
+    #defines a speacil aiohttp session for the whole bot to be able to use.
+    #defines the key to log in.
+    #the specific DB it will use.
     await super().start(*args, **kwargs)
+    #calls the orginal start method.
 
   async def close(self):
     await self.session.close()
+    #closes the aiohttp session that was the custom one defined for the bot.
     await super().close()
+    #calls the orginal close class.
 
-#subclasses bot to allow all areas to be able to use the database session.
+#subclasses bot to allow all areas of the client to be able to use the database session.
 
 bot = MeggyBot(command_prefix=commands.when_mentioned_or("m*"),intents = discord.Intents.all())
 #defines the bot object without it no bot access
