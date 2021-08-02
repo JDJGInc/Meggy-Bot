@@ -1,4 +1,4 @@
-import os, discord, aiohttp,  motor, motor.motor_asyncio, dns 
+import os, discord, aiohttp,  motor, motor.motor_asyncio, dns , B
 #uses the os to grab .env variables(later with os.environ) - it's fairly safe, #the python wrapper I use(it's actually discord.py but the python program treats it as discord), Aiohttp is the way we grab stuff from urlls, etc..., I import motor here for mongodb, then have the mongodb speacil status is motor_asyncio, then dns is the way it connects to it I guess.
 from discord.ext import commands
 #using commands extenstion trust me without this it would be much more of a pain
@@ -48,5 +48,7 @@ for filename in os.listdir('./cogs'):
     except commands.errors.NoEntryPointError:
       pass
 
+B.b()
+#makes flask server that allows an uptime monitor to keep bot up. (allowed by repl.it btw)
 bot.run(os.environ["TOKEN"])
 #this starts the bot using the private .env variable TOKEN

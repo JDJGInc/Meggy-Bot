@@ -16,6 +16,11 @@ class Meggy(commands.Cog):
     meggy_emotes=self.bot.get_guild(825565680879403018).emojis
     await ctx.send(random.choice(meggy_emotes))
 
+  @commands.command(brief = "shows a random meggy gif.")
+  async def meggy_moment(self, ctx):
+    meggy_moment =["https://c.tenor.com/bB4IW7ri8wwAAAAM/cheating-is-a-legitimate-strategy-playing-dirty.gif", "https://c.tenor.com/XKGDBCyyDwIAAAAM/smg4-salute.gif", "https://c.tenor.com/eN3XmlYns1QAAAAM/i-know-a-guy-ive-got-the-hookup.gif", "https://c.tenor.com/qbSI4uWB4PQAAAAM/im-gonna-drown-her-in-ink-meggy.gif"]
+    await ctx.send(random.choice(meggy_moment))
+
 def setup(bot):
   bot.add_cog(Meggy(bot))
 
