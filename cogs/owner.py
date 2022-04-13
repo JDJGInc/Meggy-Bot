@@ -38,5 +38,5 @@ class Owner(commands.Cog):
       except Exception as e:
         await ctx.send(e)
 
-def setup(bot):
-  bot.add_cog(Owner(bot))
+async def setup(bot):
+  await bot.add_cog(Owner(bot))

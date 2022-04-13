@@ -21,9 +21,20 @@ class MeggyBot(commands.Bot):
     await super().close()
     #calls the orginal close class.
 
+    async def setup_hook(self):
+       await self.load_extension('jishaku')
+
+      for filename in os.listdir('./cogs'):
+        if filename.endswith('.py'):
+           try:
+            await self.load_extension(f'cogs.{filename[:-3]}')
+            #helps organization commands lol
+           except commands.errors.NoEntryPointError:
+            pass
+
 #subclasses bot to allow all areas of the client to be able to use the database session.
 
-bot = MeggyBot(command_prefix=commands.when_mentioned_or("m*"),intents = discord.Intents.all())
+bot = MeggyBot(command_prefix=commands.when_mentioned_or("m*"),intents = discord.Intents.default())
 mongo_url = os.environ.get("DB_data")
 DB_client = motor.motor_asyncio.AsyncIOMotorClient(mongo_url)
 bot.DB = DB_client["Meggy_Data"]
@@ -38,7 +49,6 @@ async def on_ready():
 
 #when the boot boots up it will print the bot is ready then the name and then id.
 
-bot.load_extension('jishaku')
 
 @bot.event
 async def on_error(event, *args, **kwargs):
@@ -46,14 +56,6 @@ async def on_error(event, *args, **kwargs):
   error_wanted = traceback.format_exc()
   traceback.print_exc()
   #print(more_information[0])
-
-for filename in os.listdir('./cogs'):
-  if filename.endswith('.py'):
-    try:
-      bot.load_extension(f'cogs.{filename[:-3]}')
-      #helps organization commands lol
-    except commands.errors.NoEntryPointError:
-      pass
 
 B.b()
 #makes flask server that allows an uptime monitor to keep bot up. (allowed by repl.it btw)

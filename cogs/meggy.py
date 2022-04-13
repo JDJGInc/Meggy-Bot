@@ -21,7 +21,7 @@ class Meggy(commands.Cog):
     meggy_moment =["https://c.tenor.com/bB4IW7ri8wwAAAAM/cheating-is-a-legitimate-strategy-playing-dirty.gif", "https://c.tenor.com/XKGDBCyyDwIAAAAM/smg4-salute.gif", "https://c.tenor.com/eN3XmlYns1QAAAAM/i-know-a-guy-ive-got-the-hookup.gif", "https://c.tenor.com/qbSI4uWB4PQAAAAM/im-gonna-drown-her-in-ink-meggy.gif"]
     await ctx.send(random.choice(meggy_moment))
 
-def setup(bot):
-  bot.add_cog(Meggy(bot))
+async def setup(bot):
+  await bot.add_cog(Meggy(bot))
 
 

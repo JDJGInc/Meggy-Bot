@@ -40,6 +40,6 @@ class Mod(commands.Cog):
       if isinstance(x,str):
         await ctx.send(content=f"it returned as {x}. It couldn't fetch it :(")
 
-def setup(bot):
-  bot.add_cog(Mod(bot))
+async def setup(bot):
+  await bot.add_cog(Mod(bot))
   
