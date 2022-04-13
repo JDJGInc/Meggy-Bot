@@ -1,4 +1,5 @@
 import os, discord, aiohttp, motor, motor.motor_asyncio, dns, B
+import traceback
 
 # uses the os to grab .env variables(later with os.environ) - it's fairly safe, #the python wrapper I use(it's actually discord.py but the python program treats it as discord), Aiohttp is the way we grab stuff from urlls, etc..., I import motor here for mongodb, then have the mongodb speacil status is motor_asyncio, then dns is the way it connects to it I guess.
 from discord.ext import commands
