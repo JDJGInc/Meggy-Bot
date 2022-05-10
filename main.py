@@ -35,7 +35,7 @@ class MeggyBot(commands.Bot):
                         await self.load_extension(f"cogs.{filename[:-3]}")
                     # helps organization commands lol
                     except commands.errors.NoEntryPointError:
-                        pass
+                        traceback.print_exec()
 
         # a must to do this :) and use cogs
 
